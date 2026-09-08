@@ -330,9 +330,7 @@
                             <th>T7</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody-7a6">
-                        <!-- Data will be loaded here -->
-                    </tbody>
+                    <tbody id="tbody-7a6"></tbody>
                 </table>
                 <div id="error-7a6" style="display: none;"></div>
             </div>
@@ -357,9 +355,7 @@
                             <th>T7</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody-9a9">
-                        <!-- Data will be loaded here -->
-                    </tbody>
+                    <tbody id="tbody-9a9"></tbody>
                 </table>
                 <div id="error-9a9" style="display: none;"></div>
             </div>
@@ -372,13 +368,39 @@
     </div>
 
     <script>
-        // Google Sheets Configuration
+        // ===== CẤU HÌNH GOOGLE SHEETS =====
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSPcpB9A2glEjMqqQpekznvgWJ1jcvif5rYOhTVkCbI6yrMVj7hD1wyNqXeCSyWx0Tcmc9-PlbC9LQO/pub?gid=859933321&single=true&output=csv';
+        
+        // ===== CẤU HÌNH VÙNG DỮ LIỆU =====
+        // Lưu ý: CSV index = Sheet row - 1, CSV col index = Sheet col - 1
+        // Cột B = index 1, Cột C = index 2, ..., Cột J = index 9
+        const DATA_RANGES = {
+            '7a6': {
+                morning: {
+                    startRow: 4, endRow: 8,  // Dòng 5-9 của sheet (B5:J9) - 5 tiết sáng
+                    startCol: 2, endCol: 9   // Cột C-J (bỏ cột B vì đã có label Buổi riêng)
+                },
+                afternoon: {
+                    startRow: 9, endRow: 13, // Dòng 10-14 của sheet (B10:J14) - 5 tiết chiều
+                    startCol: 2, endCol: 9
+                }
+            },
+            '9a9': {
+                morning: {
+                    startRow: 18, endRow: 22, // Dòng 19-23 của sheet (B19:J23) - 5 tiết sáng
+                    startCol: 2, endCol: 9
+                },
+                afternoon: {
+                    startRow: 23, endRow: 27, // Dòng 24-28 của sheet (B24:J28) - 5 tiết chiều
+                    startCol: 2, endCol: 9
+                }
+            }
+        };
         
         let lastDataHash = '';
         let lastUpdateTime = null;
 
-        // Parse CSV
+        // ===== PARSE CSV =====
         function parseCSV(text) {
             const lines = text.split('\n').map(line => line.trim()).filter(line => line);
             const result = [];
@@ -406,30 +428,30 @@
             return result;
         }
 
-        // Get cell value safely
-        function getCell(data, row, col) {
-            if (data[row] && data[row][col]) {
-                return data[row][col].trim();
+        // ===== LẤY GIÁ TRỊ Ô =====
+        function getCellValue(data, sheetRow, sheetCol) {
+            const csvRow = sheetRow - 1; // Chuyển đổi từ số dòng sheet sang CSV index
+            const csvCol = sheetCol - 1; // Chuyển đổi từ số cột sheet sang CSV index
+            
+            if (data[csvRow] && data[csvRow][csvCol]) {
+                return data[csvRow][csvCol].trim();
             }
             return '';
         }
 
-        // Check if cell is empty
+        // ===== KIỂM TRA Ô TRỐNG =====
         function isEmpty(value) {
             return !value || value === '' || value === '-' || value === '​';
         }
 
-        // Create table row HTML
-        function createRowHTML(cells, periodClass, isAfternoonStart = false) {
+        // ===== TẠO HTML CHO MỘT DÒNG TIẾT =====
+        function createPeriodRowHTML(cells, periodClass, isAfternoonStart = false) {
             const rowClass = isAfternoonStart ? `${periodClass} afternoon-start` : periodClass;
             let html = `<tr class="${rowClass}">`;
             
+            // cells[0] = Tiết, cells[1] = Giờ, cells[2-7] = Môn T2-T7
             cells.forEach((cell, index) => {
-                if (index === 0) {
-                    // First cell (Sáng/Chiều label)
-                    const sessionClass = cell.toLowerCase().includes('sáng') || cell.toLowerCase().includes('sang') ? 'session-morning' : 'session-afternoon';
-                    html += `<td rowspan="5" class="${sessionClass}">${cell}</td>`;
-                } else if (isEmpty(cell)) {
+                if (isEmpty(cell)) {
                     html += `<td class="empty-cell">-</td>`;
                 } else {
                     html += `<td>${cell}</td>`;
@@ -440,124 +462,68 @@
             return html;
         }
 
-        // Load and render data for class 7A6
-        function loadClass7A6(data) {
-            const tbody = document.getElementById('tbody-7a6');
+        // ===== RENDER BẢNG CHO MỘT LỚP =====
+        function renderClassTable(classId, data) {
+            const tbody = document.getElementById(`tbody-${classId}`);
+            const ranges = DATA_RANGES[classId];
             let html = '';
             
-            // Morning sessions (rows 4-8 in CSV, index 4-8)
-            // Row 4: Headers, Row 5-9: Morning sessions
-            const morningRows = [
-                [getCell(data, 4, 0), getCell(data, 4, 1), getCell(data, 4, 2), 
-                 getCell(data, 4, 3), getCell(data, 4, 4), getCell(data, 4, 5), 
-                 getCell(data, 4, 6), getCell(data, 4, 7), getCell(data, 4, 8)],
-                [getCell(data, 5, 0), getCell(data, 5, 1), getCell(data, 5, 2), 
-                 getCell(data, 5, 3), getCell(data, 5, 4), getCell(data, 5, 5), 
-                 getCell(data, 5, 6), getCell(data, 5, 7), getCell(data, 5, 8)],
-                [getCell(data, 6, 0), getCell(data, 6, 1), getCell(data, 6, 2), 
-                 getCell(data, 6, 3), getCell(data, 6, 4), getCell(data, 6, 5), 
-                 getCell(data, 6, 6), getCell(data, 6, 7), getCell(data, 6, 8)],
-                [getCell(data, 7, 0), getCell(data, 7, 1), getCell(data, 7, 2), 
-                 getCell(data, 7, 3), getCell(data, 7, 4), getCell(data, 7, 5), 
-                 getCell(data, 7, 6), getCell(data, 7, 7), getCell(data, 7, 8)],
-                [getCell(data, 8, 0), getCell(data, 8, 1), getCell(data, 8, 2), 
-                 getCell(data, 8, 3), getCell(data, 8, 4), getCell(data, 8, 5), 
-                 getCell(data, 8, 6), getCell(data, 8, 7), getCell(data, 8, 8)]
-            ];
+            // ===== RENDER BUỔI SÁNG =====
+            const morningRange = ranges.morning;
+            for (let i = 0; i < 5; i++) {
+                const sheetRow = morningRange.startRow + i;
+                const cells = [];
+                
+                // Lấy dữ liệu từ cột C đến J (index 2-9)
+                for (let col = morningRange.startCol; col <= morningRange.endCol; col++) {
+                    cells.push(getCellValue(data, sheetRow, col));
+                }
+                
+                const periodClass = i % 2 === 0 ? 'morning-odd' : 'morning-even';
+                
+                if (i === 0) {
+                    // Dòng đầu tiên có label "Sáng" với rowspan=5
+                    html += `<tr class="${periodClass}">`;
+                    html += `<td rowspan="5" class="session-morning">Sáng</td>`;
+                    cells.forEach(cell => {
+                        html += isEmpty(cell) ? `<td class="empty-cell">-</td>` : `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                } else {
+                    html += createPeriodRowHTML(cells, periodClass);
+                }
+            }
             
-            // Afternoon sessions (rows 9-13 in CSV, index 9-13)
-            const afternoonRows = [
-                [getCell(data, 9, 0), getCell(data, 9, 1), getCell(data, 9, 2), 
-                 getCell(data, 9, 3), getCell(data, 9, 4), getCell(data, 9, 5), 
-                 getCell(data, 9, 6), getCell(data, 9, 7), getCell(data, 9, 8)],
-                [getCell(data, 10, 0), getCell(data, 10, 1), getCell(data, 10, 2), 
-                 getCell(data, 10, 3), getCell(data, 10, 4), getCell(data, 10, 5), 
-                 getCell(data, 10, 6), getCell(data, 10, 7), getCell(data, 10, 8)],
-                [getCell(data, 11, 0), getCell(data, 11, 1), getCell(data, 11, 2), 
-                 getCell(data, 11, 3), getCell(data, 11, 4), getCell(data, 11, 5), 
-                 getCell(data, 11, 6), getCell(data, 11, 7), getCell(data, 11, 8)],
-                [getCell(data, 12, 0), getCell(data, 12, 1), getCell(data, 12, 2), 
-                 getCell(data, 12, 3), getCell(data, 12, 4), getCell(data, 12, 5), 
-                 getCell(data, 12, 6), getCell(data, 12, 7), getCell(data, 12, 8)],
-                [getCell(data, 13, 0), getCell(data, 13, 1), getCell(data, 13, 2), 
-                 getCell(data, 13, 3), getCell(data, 13, 4), getCell(data, 13, 5), 
-                 getCell(data, 13, 6), getCell(data, 13, 7), getCell(data, 13, 8)]
-            ];
-            
-            // Render morning
-            morningRows.forEach((row, index) => {
-                const periodClass = index % 2 === 0 ? 'morning-odd' : 'morning-even';
-                html += createRowHTML(row, periodClass);
-            });
-            
-            // Render afternoon
-            afternoonRows.forEach((row, index) => {
-                const periodClass = index % 2 === 0 ? 'afternoon-odd' : 'afternoon-even';
-                html += createRowHTML(row, periodClass, index === 0);
-            });
+            // ===== RENDER BUỔI CHIỀU =====
+            const afternoonRange = ranges.afternoon;
+            for (let i = 0; i < 5; i++) {
+                const sheetRow = afternoonRange.startRow + i;
+                const cells = [];
+                
+                // Lấy dữ liệu từ cột C đến J (index 2-9)
+                for (let col = afternoonRange.startCol; col <= afternoonRange.endCol; col++) {
+                    cells.push(getCellValue(data, sheetRow, col));
+                }
+                
+                const periodClass = i % 2 === 0 ? 'afternoon-odd' : 'afternoon-even';
+                
+                if (i === 0) {
+                    // Dòng đầu tiên có label "Chiều" với rowspan=5 và viền đậm
+                    html += `<tr class="${periodClass} afternoon-start">`;
+                    html += `<td rowspan="5" class="session-afternoon">Chiều</td>`;
+                    cells.forEach(cell => {
+                        html += isEmpty(cell) ? `<td class="empty-cell">-</td>` : `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                } else {
+                    html += createPeriodRowHTML(cells, periodClass, false);
+                }
+            }
             
             tbody.innerHTML = html;
         }
 
-        // Load and render data for class 9A9
-        function loadClass9A9(data) {
-            const tbody = document.getElementById('tbody-9a9');
-            let html = '';
-            
-            // Morning sessions (rows 17-21 in CSV, index 17-21)
-            const morningRows = [
-                [getCell(data, 17, 0), getCell(data, 17, 1), getCell(data, 17, 2), 
-                 getCell(data, 17, 3), getCell(data, 17, 4), getCell(data, 17, 5), 
-                 getCell(data, 17, 6), getCell(data, 17, 7), getCell(data, 17, 8)],
-                [getCell(data, 18, 0), getCell(data, 18, 1), getCell(data, 18, 2), 
-                 getCell(data, 18, 3), getCell(data, 18, 4), getCell(data, 18, 5), 
-                 getCell(data, 18, 6), getCell(data, 18, 7), getCell(data, 18, 8)],
-                [getCell(data, 19, 0), getCell(data, 19, 1), getCell(data, 19, 2), 
-                 getCell(data, 19, 3), getCell(data, 19, 4), getCell(data, 19, 5), 
-                 getCell(data, 19, 6), getCell(data, 19, 7), getCell(data, 19, 8)],
-                [getCell(data, 20, 0), getCell(data, 20, 1), getCell(data, 20, 2), 
-                 getCell(data, 20, 3), getCell(data, 20, 4), getCell(data, 20, 5), 
-                 getCell(data, 20, 6), getCell(data, 20, 7), getCell(data, 20, 8)],
-                [getCell(data, 21, 0), getCell(data, 21, 1), getCell(data, 21, 2), 
-                 getCell(data, 21, 3), getCell(data, 21, 4), getCell(data, 21, 5), 
-                 getCell(data, 21, 6), getCell(data, 21, 7), getCell(data, 21, 8)]
-            ];
-            
-            // Afternoon sessions (rows 22-26 in CSV, index 22-26)
-            const afternoonRows = [
-                [getCell(data, 22, 0), getCell(data, 22, 1), getCell(data, 22, 2), 
-                 getCell(data, 22, 3), getCell(data, 22, 4), getCell(data, 22, 5), 
-                 getCell(data, 22, 6), getCell(data, 22, 7), getCell(data, 22, 8)],
-                [getCell(data, 23, 0), getCell(data, 23, 1), getCell(data, 23, 2), 
-                 getCell(data, 23, 3), getCell(data, 23, 4), getCell(data, 23, 5), 
-                 getCell(data, 23, 6), getCell(data, 23, 7), getCell(data, 23, 8)],
-                [getCell(data, 24, 0), getCell(data, 24, 1), getCell(data, 24, 2), 
-                 getCell(data, 24, 3), getCell(data, 24, 4), getCell(data, 24, 5), 
-                 getCell(data, 24, 6), getCell(data, 24, 7), getCell(data, 24, 8)],
-                [getCell(data, 25, 0), getCell(data, 25, 1), getCell(data, 25, 2), 
-                 getCell(data, 25, 3), getCell(data, 25, 4), getCell(data, 25, 5), 
-                 getCell(data, 25, 6), getCell(data, 25, 7), getCell(data, 25, 8)],
-                [getCell(data, 26, 0), getCell(data, 26, 1), getCell(data, 26, 2), 
-                 getCell(data, 26, 3), getCell(data, 26, 4), getCell(data, 26, 5), 
-                 getCell(data, 26, 6), getCell(data, 26, 7), getCell(data, 26, 8)]
-            ];
-            
-            // Render morning
-            morningRows.forEach((row, index) => {
-                const periodClass = index % 2 === 0 ? 'morning-odd' : 'morning-even';
-                html += createRowHTML(row, periodClass);
-            });
-            
-            // Render afternoon
-            afternoonRows.forEach((row, index) => {
-                const periodClass = index % 2 === 0 ? 'afternoon-odd' : 'afternoon-even';
-                html += createRowHTML(row, periodClass, index === 0);
-            });
-            
-            tbody.innerHTML = html;
-        }
-
-        // Main function to fetch and update data
+        // ===== LẤY VÀ CẬP NHẬT DỮ LIỆU =====
         async function fetchAndUpdateData() {
             try {
                 const response = await fetch(SHEET_URL);
@@ -566,26 +532,29 @@
                 const csvText = await response.text();
                 const data = parseCSV(csvText);
                 
-                // Check if data has changed
+                // Kiểm tra dữ liệu có thay đổi không
                 const currentHash = csvText;
                 if (currentHash !== lastDataHash) {
                     lastDataHash = currentHash;
                     lastUpdateTime = new Date();
                     
-                    // Update tables
-                    loadClass7A6(data);
-                    loadClass9A9(data);
+                    // Render bảng cho cả 2 lớp
+                    renderClassTable('7a6', data);
+                    renderClassTable('9a9', data);
                     
-                    // Show tables, hide loading
+                    // Hiển thị bảng, ẩn loading
                     document.getElementById('table-7a6').style.display = 'table';
                     document.getElementById('loading-7a6').style.display = 'none';
                     document.getElementById('table-9a9').style.display = 'table';
                     document.getElementById('loading-9a9').style.display = 'none';
                     
-                    // Update last update time
+                    // Cập nhật thời gian
                     const timeStr = lastUpdateTime.toLocaleTimeString('vi-VN');
                     document.getElementById('last-update').textContent = 
                         `Cập nhật lần cuối: ${timeStr}`;
+                    
+                    // Highlight ngày hiện tại
+                    highlightCurrentDay(new Date().getDay());
                     
                     console.log('Data updated at', timeStr);
                 }
@@ -605,7 +574,7 @@
             }
         }
 
-        // Update date and time
+        // ===== CẬP NHẬT NGÀY GIỜ =====
         function updateDateTime() {
             const now = new Date();
             const weekday = now.toLocaleDateString('vi-VN', { weekday: 'long' });
@@ -620,7 +589,6 @@
             document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
 
             calculateSchoolWeek(now);
-            highlightCurrentDay(now.getDay());
         }
 
         function calculateSchoolWeek(currentDate) {
@@ -647,20 +615,14 @@
             });
         }
 
-        // Initialize
+        // ===== KHỞI TẠO =====
         function init() {
-            // Fetch data immediately
             fetchAndUpdateData();
-            
-            // Auto-refresh every 2 minutes
-            setInterval(fetchAndUpdateData, 120000);
-            
-            // Update clock every second
+            setInterval(fetchAndUpdateData, 120000); // Refresh mỗi 2 phút
             updateDateTime();
             setInterval(updateDateTime, 1000);
         }
 
-        // Start when page loads
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
