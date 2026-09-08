@@ -123,8 +123,8 @@
             letter-spacing: 0.3px;
         }
 
-        /* === Ô BUỔI (Sáng/Chiều): NỀN ĐẬM, CHỮ TRẮNG – phân biệt cụm === */
-        .class-7a6 .session-label {
+        /* === Ô BUỔI SÁNG: Nền đậm vừa === */
+        .class-7a6 .session-morning {
             background-color: #ec407a !important;
             color: #ffffff !important;
             font-weight: 800 !important;
@@ -132,7 +132,7 @@
             letter-spacing: 1px;
             font-size: 0.95em;
         }
-        .class-9a9 .session-label {
+        .class-9a9 .session-morning {
             background-color: #0288d1 !important;
             color: #ffffff !important;
             font-weight: 800 !important;
@@ -141,27 +141,63 @@
             font-size: 0.95em;
         }
 
-        /* === XEN KẼ NGUYÊN DÒNG – Tất cả tiết 1-5 đều như nhau === */
-        /* Tiết lẻ (1, 3, 5): nền nhạt */
-        .class-7a6 .period-odd td {
+        /* === Ô BUỔI CHIỀU: Nền ĐẬM HƠN HẲN === */
+        .class-7a6 .session-afternoon {
+            background-color: #880e4f !important;
+            color: #ffffff !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95em;
+        }
+        .class-9a9 .session-afternoon {
+            background-color: #01579b !important;
+            color: #ffffff !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95em;
+        }
+
+        /* === ĐƯỜNG VIỀN ĐẬM NGĂN CÁCH 2 CỤM === */
+        .afternoon-start td {
+            border-top: 4px solid #546e7a !important;
+        }
+
+        /* === XEN KẼ NGUYÊN DÒNG - CỤM SÁNG === */
+        .class-7a6 .morning-odd td {
             background-color: #fce4ec;
             color: #880e4f;
             font-weight: 700;
         }
-        .class-9a9 .period-odd td {
+        .class-9a9 .morning-odd td {
             background-color: #e1f5fe;
             color: #01579b;
             font-weight: 700;
         }
 
-        /* Tiết chẵn (2, 4): nền trắng */
-        .class-7a6 .period-even td {
+        .class-7a6 .morning-even td,
+        .class-9a9 .morning-even td {
             background-color: #ffffff;
             color: #444;
             font-weight: 700;
         }
-        .class-9a9 .period-even td {
-            background-color: #ffffff;
+
+        /* === XEN KẼ NGUYÊN DÒNG - CỤM CHIỀU (tone khác biệt) === */
+        .class-7a6 .afternoon-odd td {
+            background-color: #f8bbd0;
+            color: #880e4f;
+            font-weight: 700;
+        }
+        .class-9a9 .afternoon-odd td {
+            background-color: #b3e5fc;
+            color: #01579b;
+            font-weight: 700;
+        }
+
+        .class-7a6 .afternoon-even td,
+        .class-9a9 .afternoon-even td {
+            background-color: #f5f5f5;
             color: #444;
             font-weight: 700;
         }
@@ -259,9 +295,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- SÁNG: 5 tiết xen kẽ đều -->
-                        <tr class="period-odd">
-                            <td rowspan="5" class="session-label">Sáng</td>
+                        <!-- SÁNG: 5 tiết -->
+                        <tr class="morning-odd">
+                            <td rowspan="5" class="session-morning">Sáng</td>
                             <td>1</td>
                             <td>6h45-7h45</td>
                             <td>Tin học</td>
@@ -271,7 +307,7 @@
                             <td>Văn</td>
                             <td>Âm nhạc</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="morning-even">
                             <td>2</td>
                             <td>7h50-8h35</td>
                             <td>Thể dục</td>
@@ -281,7 +317,7 @@
                             <td>Văn</td>
                             <td>Sinh</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="morning-odd">
                             <td>3</td>
                             <td>8h50-9h35</td>
                             <td>HĐTN</td>
@@ -291,7 +327,7 @@
                             <td>Ngoại ngữ</td>
                             <td>Công nghệ</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="morning-even">
                             <td>4</td>
                             <td>9h40-10h25</td>
                             <td>Ngoại ngữ</td>
@@ -301,7 +337,7 @@
                             <td>Thể dục</td>
                             <td>Toán</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="morning-odd">
                             <td>5</td>
                             <td>10h30-11h15</td>
                             <td class="empty-cell">-</td>
@@ -311,9 +347,9 @@
                             <td>Địa</td>
                             <td>SHL</td>
                         </tr>
-                        <!-- CHIỀU: 5 tiết xen kẽ đều -->
-                        <tr class="period-odd">
-                            <td rowspan="5" class="session-label">Chiều</td>
+                        <!-- CHIỀU: 5 tiết (vùng B10:J14) -->
+                        <tr class="afternoon-odd afternoon-start">
+                            <td rowspan="5" class="session-afternoon">Chiều</td>
                             <td>1</td>
                             <td>12h45-13h45</td>
                             <td class="empty-cell">-</td>
@@ -323,7 +359,7 @@
                             <td class="empty-cell">-</td>
                             <td>Hóa</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="afternoon-even">
                             <td>2</td>
                             <td>13h50-14h35</td>
                             <td>Toán</td>
@@ -333,7 +369,7 @@
                             <td class="empty-cell">-</td>
                             <td>Thể dục</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="afternoon-odd">
                             <td>3</td>
                             <td>14h40-15h25</td>
                             <td>Toán</td>
@@ -343,7 +379,7 @@
                             <td class="empty-cell">-</td>
                             <td>Văn</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="afternoon-even">
                             <td>4</td>
                             <td>15h40-16h25</td>
                             <td class="empty-cell">-</td>
@@ -353,7 +389,7 @@
                             <td class="empty-cell">-</td>
                             <td>Sử</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="afternoon-odd">
                             <td>5</td>
                             <td>16h30-17h15</td>
                             <td class="empty-cell">-</td>
@@ -387,9 +423,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- SÁNG: 5 tiết xen kẽ đều -->
-                        <tr class="period-odd">
-                            <td rowspan="5" class="session-label">Sáng</td>
+                        <!-- SÁNG: 5 tiết -->
+                        <tr class="morning-odd">
+                            <td rowspan="5" class="session-morning">Sáng</td>
                             <td>1</td>
                             <td>6h45-7h45</td>
                             <td>Sinh</td>
@@ -399,7 +435,7 @@
                             <td>Thể dục</td>
                             <td>Văn</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="morning-even">
                             <td>2</td>
                             <td>7h50-8h35</td>
                             <td>Âm nhạc</td>
@@ -409,7 +445,7 @@
                             <td>Vật lý</td>
                             <td>Ngoại ngữ</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="morning-odd">
                             <td>3</td>
                             <td>8h50-9h35</td>
                             <td>Ngoại ngữ</td>
@@ -419,7 +455,7 @@
                             <td>Toán</td>
                             <td>HĐTN</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="morning-even">
                             <td>4</td>
                             <td>9h40-10h25</td>
                             <td>Tin học</td>
@@ -429,7 +465,7 @@
                             <td>Văn</td>
                             <td>HĐTN</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="morning-odd">
                             <td>5</td>
                             <td>10h30-11h15</td>
                             <td class="empty-cell">-</td>
@@ -439,9 +475,9 @@
                             <td>Văn</td>
                             <td>SHL</td>
                         </tr>
-                        <!-- CHIỀU: 5 tiết xen kẽ đều -->
-                        <tr class="period-odd">
-                            <td rowspan="5" class="session-label">Chiều</td>
+                        <!-- CHIỀU: 5 tiết (vùng B24:J28) -->
+                        <tr class="afternoon-odd afternoon-start">
+                            <td rowspan="5" class="session-afternoon">Chiều</td>
                             <td>1</td>
                             <td>12h45-13h45</td>
                             <td class="empty-cell">-</td>
@@ -451,7 +487,7 @@
                             <td class="empty-cell">-</td>
                             <td class="empty-cell">-</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="afternoon-even">
                             <td>2</td>
                             <td>13h50-14h35</td>
                             <td class="empty-cell">-</td>
@@ -461,7 +497,7 @@
                             <td class="empty-cell">-</td>
                             <td class="empty-cell">-</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="afternoon-odd">
                             <td>3</td>
                             <td>14h40-15h25</td>
                             <td class="empty-cell">-</td>
@@ -471,7 +507,7 @@
                             <td class="empty-cell">-</td>
                             <td class="empty-cell">-</td>
                         </tr>
-                        <tr class="period-even">
+                        <tr class="afternoon-even">
                             <td>4</td>
                             <td>15h40-16h25</td>
                             <td class="empty-cell">-</td>
@@ -481,7 +517,7 @@
                             <td class="empty-cell">-</td>
                             <td class="empty-cell">-</td>
                         </tr>
-                        <tr class="period-odd">
+                        <tr class="afternoon-odd">
                             <td>5</td>
                             <td>16h30-17h15</td>
                             <td class="empty-cell">-</td>
