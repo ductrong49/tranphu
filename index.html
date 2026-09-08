@@ -6,11 +6,7 @@
     <title>Thời Khóa Biểu Năm Học 2026-2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Nunito', sans-serif;
@@ -24,12 +20,9 @@
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        /* Header chung */
+        /* Header */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -53,7 +46,7 @@
             font-weight: 600;
         }
 
-        /* Khung thông tin thời gian */
+        /* Khung thông tin */
         .datetime-week {
             display: flex;
             justify-content: center;
@@ -92,11 +85,9 @@
             background: #fff8f0;
         }
 
-        .week-box .info-value {
-            color: #e65100;
-        }
+        .week-box .info-value { color: #e65100; }
 
-        /* ===== PHẦN LỚP HỌC ===== */
+        /* Phần lớp học */
         .class-section {
             margin-bottom: 40px;
             background: #ffffff;
@@ -106,9 +97,7 @@
             transition: transform 0.3s ease;
         }
 
-        .class-section:hover {
-            transform: translateY(-2px);
-        }
+        .class-section:hover { transform: translateY(-2px); }
 
         .class-title {
             font-size: 1.6em;
@@ -120,47 +109,39 @@
             gap: 12px;
         }
 
-        /* --- PHONG CÁCH NỮ (Lớp 7A6) --- */
-        .class-7a6 {
-            border-top: 5px solid #f48fb1;
-        }
+        /* === PHONG CÁCH NỮ (Lớp 7A6) === */
+        .class-7a6 { border-top: 5px solid #f48fb1; }
         .class-7a6 .class-title {
             color: #c2185b;
             border-bottom: 2px dashed #f8bbd0;
         }
         .class-7a6 .subject-cell {
-            background-color: #fce4ec; /* Hồng pastel */
+            background-color: #fce4ec;
             color: #880e4f;
         }
-        .class-7a6 .subject-cell:hover {
-            background-color: #f8bbd0;
-        }
-        .class-7a6 .section-row {
+        .class-7a6 .subject-cell:hover { background-color: #f8bbd0; }
+        .class-7a6 .section-row td {
             background-color: #f8bbd0;
             color: #880e4f;
         }
 
-        /* --- PHONG CÁCH NAM (Lớp 9A9) --- */
-        .class-9a9 {
-            border-top: 5px solid #4fc3f7;
-        }
+        /* === PHONG CÁCH NAM (Lớp 9A9) === */
+        .class-9a9 { border-top: 5px solid #4fc3f7; }
         .class-9a9 .class-title {
             color: #0277bd;
             border-bottom: 2px solid #b3e5fc;
         }
         .class-9a9 .subject-cell {
-            background-color: #e1f5fe; /* Xanh dương pastel */
+            background-color: #e1f5fe;
             color: #01579b;
         }
-        .class-9a9 .subject-cell:hover {
-            background-color: #b3e5fc;
-        }
-        .class-9a9 .section-row {
+        .class-9a9 .subject-cell:hover { background-color: #b3e5fc; }
+        .class-9a9 .section-row td {
             background-color: #b3e5fc;
             color: #01579b;
         }
 
-        /* Bảng biểu */
+        /* Bảng */
         table {
             width: 100%;
             border-collapse: separate;
@@ -183,25 +164,20 @@
             letter-spacing: 0.5px;
         }
 
-        /* Làm tròn góc bảng */
         th:first-child { border-top-left-radius: 8px; }
         th:last-child { border-top-right-radius: 8px; }
         tr:last-child td:first-child { border-bottom-left-radius: 8px; }
         tr:last-child td:last-child { border-bottom-right-radius: 8px; }
 
-        /* Phân biệt Sáng / Chiều rõ ràng */
+        /* Phân biệt Sáng / Chiều */
         .section-row td {
             font-weight: 800;
             font-size: 0.9em;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        .section-morning::before {
-            content: '☀️ ';
-        }
-        .section-afternoon::before {
-            content: '🌤️ ';
-        }
+        .section-morning td:first-child::before { content: '☀️ '; }
+        .section-afternoon td:first-child::before { content: '🌤️ '; }
 
         /* Ô môn học */
         .subject-cell {
@@ -218,9 +194,9 @@
             font-weight: 300;
         }
 
-        /* Highlight TIÊU ĐỀ THỨ của ngày hiện tại (CHỈ HEADER) */
+        /* Highlight CHỈ TIÊU ĐỀ Thứ của ngày hiện tại */
         .current-day-header {
-            background-color: #fff3e0 !important; /* Cam pastel */
+            background-color: #fff3e0 !important;
             color: #e65100 !important;
             border: 2px solid #ffb74d !important;
             font-weight: 800;
@@ -249,7 +225,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .legend-item {
@@ -265,6 +241,7 @@
         .legend-female { background: #fce4ec; color: #880e4f; }
         .legend-male { background: #e1f5fe; color: #01579b; }
         .legend-today { background: #fff3e0; color: #e65100; border: 1px solid #ffb74d; }
+        .legend-source { background: #f5f5f5; color: #616161; font-size: 0.8em; }
 
         .footer {
             text-align: center;
@@ -285,7 +262,6 @@
         @media print {
             body { background: white; }
             .class-section, .info-box, .header { box-shadow: none; border: 1px solid #ccc; }
-            .current-day-header { border: 2px solid #999 !important; }
         }
     </style>
 </head>
@@ -311,7 +287,8 @@
             </div>
         </div>
 
-        <!-- Lớp 7A6 (Phong cách Nữ) -->
+        <!-- Lớp 7A6 - Phong cách Nữ -->
+        <!-- Dữ liệu lấy từ vùng B2:J14 (bỏ cột J "DANH SÁCH MÔN HỌC") -->
         <div class="class-section class-7a6">
             <h2 class="class-title">🌸 Lớp 7A6</h2>
             <table id="table-7a6">
@@ -329,6 +306,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- SÁNG: 5 tiết -->
                     <tr class="section-row section-morning">
                         <td rowspan="5">Sáng</td>
                         <td>1</td>
@@ -380,6 +358,7 @@
                         <td class="subject-cell">Địa</td>
                         <td class="subject-cell">SHL</td>
                     </tr>
+                    <!-- CHIỀU: 5 tiết -->
                     <tr class="section-row section-afternoon">
                         <td rowspan="5">Chiều</td>
                         <td>1</td>
@@ -435,7 +414,8 @@
             </table>
         </div>
 
-        <!-- Lớp 9A9 (Phong cách Nam) -->
+        <!-- Lớp 9A9 - Phong cách Nam -->
+        <!-- Dữ liệu lấy từ vùng B16:J28 (bỏ cột J "VẬT LÝ") -->
         <div class="class-section class-9a9">
             <h2 class="class-title">🚀 Lớp 9A9</h2>
             <table id="table-9a9">
@@ -453,6 +433,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- SÁNG: 5 tiết -->
                     <tr class="section-row section-morning">
                         <td rowspan="5">Sáng</td>
                         <td>1</td>
@@ -504,6 +485,7 @@
                         <td class="subject-cell">Văn</td>
                         <td class="subject-cell">SHL</td>
                     </tr>
+                    <!-- CHIỀU: 5 tiết -->
                     <tr class="section-row section-afternoon">
                         <td rowspan="5">Chiều</td>
                         <td>1</td>
@@ -560,9 +542,10 @@
         </div>
 
         <div class="legend">
-            <div class="legend-item legend-female">🌸 7A6: Phong cách Nữ tính, nhẹ nhàng</div>
-            <div class="legend-item legend-male">🚀 9A9: Phong cách Nam tính, gọn gàng</div>
-            <div class="legend-item legend-today">📍 Tiêu đề màu cam: Thứ của ngày hiện tại</div>
+            <div class="legend-item legend-female">🌸 7A6: Phong cách Nữ</div>
+            <div class="legend-item legend-male">🚀 9A9: Phong cách Nam</div>
+            <div class="legend-item legend-today">📍 Tiêu đề cam: Thứ của ngày hiện tại</div>
+            <div class="legend-item legend-source">📋 Dữ liệu từ vùng B2:J14 & B16:J28</div>
         </div>
 
         <div class="footer">
@@ -583,7 +566,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
             
-            // 2. Tính tuần học (Tuần 1 bắt đầu từ 07/09/2026)
+            // 2. Tính tuần học
             calculateSchoolWeek(now);
             
             // 3. Highlight CHỈ TIÊU ĐỀ của ngày hiện tại
@@ -612,36 +595,25 @@
         }
 
         function highlightCurrentDay(dayOfWeek) {
-            // dayOfWeek: 0 = Chủ Nhật, 1 = Thứ 2, ..., 6 = Thứ 7
-            if (dayOfWeek === 0) return; // Chủ nhật không có trong bảng
+            if (dayOfWeek === 0) return; // Chủ nhật không highlight
 
-            // Ánh xạ: Thứ 2 (1) -> index 3, Thứ 3 (2) -> index 4, ..., Thứ 7 (6) -> index 8
-            // Vì 3 cột đầu là: Buổi (0), Tiết (1), Thời gian (2)
-            const colIndex = dayOfWeek + 2;
+            const colIndex = dayOfWeek + 2; // Thứ 2 -> index 3, ..., Thứ 7 -> index 8
 
             document.querySelectorAll('table').forEach(table => {
-                // Reset highlight cũ ở TẤT CẢ header
+                // Reset tất cả header
                 table.querySelectorAll('th').forEach(th => {
                     th.classList.remove('current-day-header');
                 });
 
-                // CHỈ highlight header (tiêu đề) của cột hiện tại
+                // CHỈ highlight header của cột hiện tại
                 const headers = table.querySelectorAll('th');
                 if (headers[colIndex]) {
                     headers[colIndex].classList.add('current-day-header');
                 }
-                
-                // Đảm bảo không còn class highlight nào ở ô dữ liệu (td)
-                table.querySelectorAll('td').forEach(td => {
-                    td.classList.remove('current-day-cell');
-                });
             });
         }
 
-        // Chạy ngay khi tải trang
         updateDateTime();
-        
-        // Cập nhật mỗi giây
         setInterval(updateDateTime, 1000);
     </script>
 </body>
