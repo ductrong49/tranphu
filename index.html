@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>📚 Thời Khóa Biểu</title>
+    <title>📚 TKB Năm học 2026-2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -123,7 +123,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* === Ô BUỔI SÁNG: Nền đậm vừa === */
         .class-7a6 .session-morning {
             background-color: #ec407a !important;
             color: #ffffff !important;
@@ -141,7 +140,6 @@
             font-size: 0.95em;
         }
 
-        /* === Ô BUỔI CHIỀU: Nền ĐẬM HƠN HẲN === */
         .class-7a6 .session-afternoon {
             background-color: #880e4f !important;
             color: #ffffff !important;
@@ -159,56 +157,24 @@
             font-size: 0.95em;
         }
 
-        /* === ĐƯỜNG VIỀN ĐẬM NGĂN CÁCH 2 CỤM === */
         .afternoon-start td {
             border-top: 4px solid #546e7a !important;
         }
 
-        /* === XEN KẼ NGUYÊN DÒNG - CỤM SÁNG === */
-        .class-7a6 .morning-odd td {
-            background-color: #fce4ec;
-            color: #880e4f;
-            font-weight: 700;
-        }
-        .class-9a9 .morning-odd td {
-            background-color: #e1f5fe;
-            color: #01579b;
-            font-weight: 700;
-        }
+        .class-7a6 .morning-odd td { background-color: #fce4ec; color: #880e4f; font-weight: 700; }
+        .class-9a9 .morning-odd td { background-color: #e1f5fe; color: #01579b; font-weight: 700; }
 
         .class-7a6 .morning-even td,
-        .class-9a9 .morning-even td {
-            background-color: #ffffff;
-            color: #444;
-            font-weight: 700;
-        }
+        .class-9a9 .morning-even td { background-color: #ffffff; color: #444; font-weight: 700; }
 
-        /* === XEN KẼ NGUYÊN DÒNG - CỤM CHIỀU (tone khác biệt) === */
-        .class-7a6 .afternoon-odd td {
-            background-color: #f8bbd0;
-            color: #880e4f;
-            font-weight: 700;
-        }
-        .class-9a9 .afternoon-odd td {
-            background-color: #b3e5fc;
-            color: #01579b;
-            font-weight: 700;
-        }
+        .class-7a6 .afternoon-odd td { background-color: #f8bbd0; color: #880e4f; font-weight: 700; }
+        .class-9a9 .afternoon-odd td { background-color: #b3e5fc; color: #01579b; font-weight: 700; }
 
         .class-7a6 .afternoon-even td,
-        .class-9a9 .afternoon-even td {
-            background-color: #f5f5f5;
-            color: #444;
-            font-weight: 700;
-        }
+        .class-9a9 .afternoon-even td { background-color: #f5f5f5; color: #444; font-weight: 700; }
 
-        /* Ô trống */
-        .empty-cell {
-            color: #bdbdbd !important;
-            font-weight: 400 !important;
-        }
+        .empty-cell { color: #bdbdbd !important; font-weight: 400 !important; }
 
-        /* Highlight tiêu đề Thứ của ngày hiện tại */
         .current-day-header {
             background-color: #fff3e0 !important;
             color: #e65100 !important;
@@ -225,6 +191,41 @@
             background: white;
             border-radius: 50%;
             padding: 2px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 1.1em;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #c62828;
+            text-align: left;
         }
 
         .footer {
@@ -280,7 +281,8 @@
         <div class="class-section class-7a6">
             <h2 class="class-title">🌸 Lớp 7A6</h2>
             <div class="table-wrapper">
-                <table id="table-7a6">
+                <div id="loading-7a6" class="loading">Đang tải dữ liệu</div>
+                <table id="table-7a6" style="display: none;">
                     <thead>
                         <tr>
                             <th>Buổi</th>
@@ -294,113 +296,9 @@
                             <th>T7</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- SÁNG: 5 tiết -->
-                        <tr class="morning-odd">
-                            <td rowspan="5" class="session-morning">Sáng</td>
-                            <td>1</td>
-                            <td>6h45-7h45</td>
-                            <td>Tin học</td>
-                            <td>Văn</td>
-                            <td>Sinh</td>
-                            <td>HĐTN</td>
-                            <td>Văn</td>
-                            <td>Âm nhạc</td>
-                        </tr>
-                        <tr class="morning-even">
-                            <td>2</td>
-                            <td>7h50-8h35</td>
-                            <td>Thể dục</td>
-                            <td>Sử</td>
-                            <td>Sử</td>
-                            <td>HĐTN</td>
-                            <td>Văn</td>
-                            <td>Sinh</td>
-                        </tr>
-                        <tr class="morning-odd">
-                            <td>3</td>
-                            <td>8h50-9h35</td>
-                            <td>HĐTN</td>
-                            <td>GD ĐP</td>
-                            <td>Vật lý</td>
-                            <td>Văn</td>
-                            <td>Ngoại ngữ</td>
-                            <td>Công nghệ</td>
-                        </tr>
-                        <tr class="morning-even">
-                            <td>4</td>
-                            <td>9h40-10h25</td>
-                            <td>Ngoại ngữ</td>
-                            <td>Hóa</td>
-                            <td>Toán</td>
-                            <td>Mỹ thuật</td>
-                            <td>Thể dục</td>
-                            <td>Toán</td>
-                        </tr>
-                        <tr class="morning-odd">
-                            <td>5</td>
-                            <td>10h30-11h15</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Ngoại ngữ</td>
-                            <td>GDCD</td>
-                            <td>Địa</td>
-                            <td>SHL</td>
-                        </tr>
-                        <!-- CHIỀU: 5 tiết (vùng B10:J14) -->
-                        <tr class="afternoon-odd afternoon-start">
-                            <td rowspan="5" class="session-afternoon">Chiều</td>
-                            <td>1</td>
-                            <td>12h45-13h45</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Hóa</td>
-                        </tr>
-                        <tr class="afternoon-even">
-                            <td>2</td>
-                            <td>13h50-14h35</td>
-                            <td>Toán</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Thể dục</td>
-                        </tr>
-                        <tr class="afternoon-odd">
-                            <td>3</td>
-                            <td>14h40-15h25</td>
-                            <td>Toán</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Văn</td>
-                        </tr>
-                        <tr class="afternoon-even">
-                            <td>4</td>
-                            <td>15h40-16h25</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Sử</td>
-                        </tr>
-                        <tr class="afternoon-odd">
-                            <td>5</td>
-                            <td>16h30-17h15</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>Công nghệ</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbody-7a6"></tbody>
                 </table>
+                <div id="error-7a6" style="display: none;"></div>
             </div>
         </div>
 
@@ -408,7 +306,8 @@
         <div class="class-section class-9a9">
             <h2 class="class-title">🚀 Lớp 9A9</h2>
             <div class="table-wrapper">
-                <table id="table-9a9">
+                <div id="loading-9a9" class="loading">Đang tải dữ liệu</div>
+                <table id="table-9a9" style="display: none;">
                     <thead>
                         <tr>
                             <th>Buổi</th>
@@ -422,122 +321,181 @@
                             <th>T7</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- SÁNG: 5 tiết -->
-                        <tr class="morning-odd">
-                            <td rowspan="5" class="session-morning">Sáng</td>
-                            <td>1</td>
-                            <td>6h45-7h45</td>
-                            <td>Sinh</td>
-                            <td>Sử</td>
-                            <td>Mỹ thuật</td>
-                            <td>Sử</td>
-                            <td>Thể dục</td>
-                            <td>Văn</td>
-                        </tr>
-                        <tr class="morning-even">
-                            <td>2</td>
-                            <td>7h50-8h35</td>
-                            <td>Âm nhạc</td>
-                            <td>Văn</td>
-                            <td>Ngoại ngữ</td>
-                            <td>Vật lý</td>
-                            <td>Vật lý</td>
-                            <td>Ngoại ngữ</td>
-                        </tr>
-                        <tr class="morning-odd">
-                            <td>3</td>
-                            <td>8h50-9h35</td>
-                            <td>Ngoại ngữ</td>
-                            <td>GD ĐP</td>
-                            <td>Toán</td>
-                            <td>Thể dục</td>
-                            <td>Toán</td>
-                            <td>HĐTN</td>
-                        </tr>
-                        <tr class="morning-even">
-                            <td>4</td>
-                            <td>9h40-10h25</td>
-                            <td>Tin học</td>
-                            <td>GDCD</td>
-                            <td>Công nghệ</td>
-                            <td>Toán</td>
-                            <td>Văn</td>
-                            <td>HĐTN</td>
-                        </tr>
-                        <tr class="morning-odd">
-                            <td>5</td>
-                            <td>10h30-11h15</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td>HĐTN</td>
-                            <td>Toán</td>
-                            <td>Văn</td>
-                            <td>SHL</td>
-                        </tr>
-                        <!-- CHIỀU: 5 tiết (vùng B24:J28) -->
-                        <tr class="afternoon-odd afternoon-start">
-                            <td rowspan="5" class="session-afternoon">Chiều</td>
-                            <td>1</td>
-                            <td>12h45-13h45</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                        </tr>
-                        <tr class="afternoon-even">
-                            <td>2</td>
-                            <td>13h50-14h35</td>
-                            <td class="empty-cell">-</td>
-                            <td>Địa</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                        </tr>
-                        <tr class="afternoon-odd">
-                            <td>3</td>
-                            <td>14h40-15h25</td>
-                            <td class="empty-cell">-</td>
-                            <td>Hóa</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                        </tr>
-                        <tr class="afternoon-even">
-                            <td>4</td>
-                            <td>15h40-16h25</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                        </tr>
-                        <tr class="afternoon-odd">
-                            <td>5</td>
-                            <td>16h30-17h15</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                            <td class="empty-cell">-</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbody-9a9"></tbody>
                 </table>
+                <div id="error-9a9" style="display: none;"></div>
             </div>
         </div>
 
         <div class="footer">
-            <p>Mục tiêu đạt học sinh xuất sắc! 🌟</p>
+            <p>🌟 MỤC TIÊU HỌC SINH XUẤT SẮC!</p>
+            <p>Năm học 2026-2027</p>
         </div>
     </div>
 
     <script>
+        // ===== 1. CẤU HÌNH GOOGLE SHEETS =====
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSPcpB9A2glEjMqqQpekznvgWJ1jcvif5rYOhTVkCbI6yrMVj7hD1wyNqXeCSyWx0Tcmc9-PlbC9LQO/pub?gid=859933321&single=true&output=csv';
+        
+        // ===== 2. CẤU HÌNH VÙNG DỮ LIỆU (1-based indexing: Dòng 1 = 1, Cột A = 1) =====
+        const DATA_RANGES = {
+            '7a6': {
+                morning:    { startRow: 4, endRow: 8,  startCol: 2, endCol: 9 }, // Dòng 5-9, Cột C-J
+                afternoon:  { startRow: 9, endRow: 13, startCol: 2, endCol: 9 } // Dòng 10-14, Cột C-J
+            },
+            '9a9': {
+                morning:    { startRow: 17, endRow: 21, startCol: 2, endCol: 9 }, // Dòng 19-23, Cột C-J
+                afternoon:  { startRow: 22, endRow: 26, startCol: 2, endCol: 9 }  // Dòng 24-28, Cột C-J
+            }
+        };
+        
+        let lastDataHash = '';
+
+        // ===== 3. HÀM XỬ LÝ DỮ LIỆU =====
+        function parseCSV(text) {
+            const lines = text.split('\n').map(line => line.trim()).filter(line => line);
+            const result = [];
+            
+            for (let line of lines) {
+                const row = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        row.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                row.push(current.trim());
+                result.push(row);
+            }
+            return result;
+        }
+
+        function getCellValue(data, sheetRow, sheetCol) {
+            const csvRow = sheetRow - 1; 
+            const csvCol = sheetCol - 1; 
+            
+            if (data[csvRow] && data[csvRow][csvCol] !== undefined) {
+                return data[csvRow][csvCol].trim();
+            }
+            return '';
+        }
+
+        function isEmpty(value) {
+            return !value || value === '' || value === '-' || value === '​'; 
+        }
+
+        function createPeriodRowHTML(cells, periodClass, isAfternoonStart = false) {
+            const rowClass = isAfternoonStart ? `${periodClass} afternoon-start` : periodClass;
+            let html = `<tr class="${rowClass}">`;
+            
+            cells.forEach(cell => {
+                html += isEmpty(cell) ? `<td class="empty-cell">-</td>` : `<td>${cell}</td>`;
+            });
+            
+            html += '</tr>';
+            return html;
+        }
+
+        // ===== 4. RENDER BẢNG =====
+        function renderClassTable(classId, data) {
+            const tbody = document.getElementById(`tbody-${classId}`);
+            const ranges = DATA_RANGES[classId];
+            let html = '';
+            
+            // Render Buổi Sáng
+            for (let i = 0; i < 5; i++) {
+                const sheetRow = ranges.morning.startRow + i;
+                const cells = [];
+                for (let col = ranges.morning.startCol; col <= ranges.morning.endCol; col++) {
+                    cells.push(getCellValue(data, sheetRow, col));
+                }
+                
+                const periodClass = i % 2 === 0 ? 'morning-odd' : 'morning-even';
+                
+                if (i === 0) {
+                    html += `<tr class="${periodClass}">`;
+                    html += `<td rowspan="5" class="session-morning">Sáng</td>`;
+                    cells.forEach(cell => {
+                        html += isEmpty(cell) ? `<td class="empty-cell">-</td>` : `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                } else {
+                    html += createPeriodRowHTML(cells, periodClass);
+                }
+            }
+            
+            // Render Buổi Chiều
+            for (let i = 0; i < 5; i++) {
+                const sheetRow = ranges.afternoon.startRow + i;
+                const cells = [];
+                for (let col = ranges.afternoon.startCol; col <= ranges.afternoon.endCol; col++) {
+                    cells.push(getCellValue(data, sheetRow, col));
+                }
+                
+                const periodClass = i % 2 === 0 ? 'afternoon-odd' : 'afternoon-even';
+                
+                if (i === 0) {
+                    html += `<tr class="${periodClass} afternoon-start">`;
+                    html += `<td rowspan="5" class="session-afternoon">Chiều</td>`;
+                    cells.forEach(cell => {
+                        html += isEmpty(cell) ? `<td class="empty-cell">-</td>` : `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                } else {
+                    html += createPeriodRowHTML(cells, periodClass, false);
+                }
+            }
+            
+            tbody.innerHTML = html;
+        }
+
+        // ===== 5. FETCH & UPDATE =====
+        async function fetchAndUpdateData() {
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
+                const csvText = await response.text();
+                
+                // Chỉ render nếu dữ liệu thay đổi
+                if (csvText !== lastDataHash) {
+                    lastDataHash = csvText;
+                    const data = parseCSV(csvText);
+                    
+                    renderClassTable('7a6', data);
+                    renderClassTable('9a9', data);
+                    
+                    document.getElementById('table-7a6').style.display = 'table';
+                    document.getElementById('loading-7a6').style.display = 'none';
+                    document.getElementById('table-9a9').style.display = 'table';
+                    document.getElementById('loading-9a9').style.display = 'none';
+                    
+                    console.log('✅ Dữ liệu đã được cập nhật tự động.');
+                    highlightCurrentDay(new Date().getDay());
+                }
+            } catch (error) {
+                console.error('❌ Lỗi tải dữ liệu:', error);
+                document.getElementById('loading-7a6').style.display = 'none';
+                document.getElementById('loading-9a9').style.display = 'none';
+                
+                const errorMsg = `<div class="error-message">⚠️ Không thể tải dữ liệu từ Google Sheets.<br><small>${error.message}</small><br>Vui lòng kiểm tra kết nối mạng hoặc quyền chia sẻ Sheet.</div>`;
+                
+                document.getElementById('error-7a6').style.display = 'block';
+                document.getElementById('error-7a6').innerHTML = errorMsg;
+                document.getElementById('error-9a9').style.display = 'block';
+                document.getElementById('error-9a9').innerHTML = errorMsg;
+            }
+        }
+
+        // ===== 6. TIỆN ÍCH NGÀY GIỜ =====
         function updateDateTime() {
             const now = new Date();
             const weekday = now.toLocaleDateString('vi-VN', { weekday: 'long' });
@@ -552,35 +510,48 @@
             document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
 
             calculateSchoolWeek(now);
-            highlightCurrentDay(now.getDay());
         }
 
         function calculateSchoolWeek(currentDate) {
-            const startDate = new Date(2026, 8, 7);
+            const startDate = new Date(2026, 8, 7); // 7/9/2026
             startDate.setHours(0, 0, 0, 0);
+            
             const current = new Date(currentDate);
             const dayOfWeek = current.getDay();
             const diff = current.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
             const currentMonday = new Date(current.setDate(diff));
             currentMonday.setHours(0, 0, 0, 0);
+            
             const diffTime = currentMonday - startDate;
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
             const weekNumber = Math.floor(diffDays / 7) + 1;
+            
             document.getElementById('week-number').textContent = weekNumber > 0 ? weekNumber : '—';
         }
 
         function highlightCurrentDay(dayOfWeek) {
-            if (dayOfWeek === 0) return;
-            const colIndex = dayOfWeek + 2;
+            if (dayOfWeek === 0) return; // Bỏ qua Chủ Nhật
+            const colIndex = dayOfWeek + 2; // T2=3, T3=4, ..., T7=8
+            
             document.querySelectorAll('table').forEach(table => {
                 table.querySelectorAll('th').forEach(th => th.classList.remove('current-day-header'));
                 const headers = table.querySelectorAll('th');
-                if (headers[colIndex]) headers[colIndex].classList.add('current-day-header');
+                if (headers[colIndex]) {
+                    headers[colIndex].classList.add('current-day-header');
+                }
             });
         }
 
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+        // ===== 7. KHỞI TẠO =====
+        function init() {
+            fetchAndUpdateData();
+            setInterval(fetchAndUpdateData, 120000); // Tự động kiểm tra cập nhật mỗi 2 phút
+            
+            updateDateTime();
+            setInterval(updateDateTime, 1000); // Cập nhật đồng hồ mỗi giây
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
