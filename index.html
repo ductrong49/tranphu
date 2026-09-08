@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Khóa Biểu Năm Học 2026-2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', 'Comic Neue', cursive, sans-serif;
+            background: 
+                linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23fef9e7" width="100" height="100"/><path d="M0,20 Q25,15 50,20 T100,20 M0,40 Q25,35 50,40 T100,40 M0,60 Q25,55 50,60 T100,60 M0,80 Q25,75 50,80 T100,80" stroke="%23ffb6c1" stroke-width="0.5" fill="none" opacity="0.3"/><text x="10" y="30" font-size="20" opacity="0.1">✏️</text><text x="70" y="70" font-size="24" opacity="0.1">📏</text><text x="40" y="90" font-size="18" opacity="0.1">✂️</text></svg>');
+            background-size: 20px 20px, 20px 20px, 200px 200px;
+            background-color: #fffef0;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="10" y="30" font-size="30">️</text><text x="60" y="50" font-size="30">📐</text><text x="30" y="80" font-size="30">📚</text><text x="70" y="20" font-size="30"></text></svg>') repeat;
+            background-size: 400px 400px;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '📚';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            opacity: 0.3;
+        }
+
+        .header::after {
+            content: '✏️';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #ffeaa7;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .datetime-week {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .datetime-box {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            min-width: 250px;
+        }
+
+        .datetime-box.week-box {
+            border-left-color: #f093fb;
+            background: linear-gradient(135deg, #fff 0%, #fff5f8 100%);
+        }
+
+        .datetime-label {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .datetime-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        .week-number {
+            font-size: 2.5em;
+            color: #764ba2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .class-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .class-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px dashed #dfe6e9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .class-title::before {
+            content: '🎓';
+            font-size: 1.2em;
+        }
+
+        .class-7a6 .class-title {
+            color: #667eea;
+        }
+
+        .class-9a9 .class-title {
+            color: #f093fb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            border: 2px solid #dfe6e9;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+        tr:hover td {
+            transform: scale(1.02);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .time-col {
+            background: #f8f9fa;
+            font-weight: 700;
+            color: #2d3436;
+            min-width: 100px;
+        }
+
+        .period-col {
+            background: #dfe6e9;
+            font-weight: 700;
+            color: #2d3436;
+            min-width: 60px;
+        }
+
+        .section-row td {
+            background: #ffeaa7;
+            font-weight: 700;
+            color: #2d3436;
+            text-transform: uppercase;
+        }
+
+        /* Subject colors */
+        .subject-van { background: #ffeaa7; color: #2d3436; }
+        .subject-toan { background: #74b9ff; color: #2d3436; }
+        .subject-anh { background: #a29bfe; color: white; }
+        .subject-ly { background: #fd79a8; color: white; }
+        .subject-hoa { background: #fdcb6e; color: #2d3436; }
+        .subject-sinh { background: #00b894; color: white; }
+        .subject-su { background: #e17055; color: white; }
+        .subject-dia { background: #00cec9; color: white; }
+        .subject-gdcd { background: #d63031; color: white; }
+        .subject-the-duc { background: #55efc4; color: #2d3436; }
+        .subject-am-nhac { background: #fd79a8; color: white; }
+        .subject-my-thuat { background: #fdcb6e; color: #2d3436; }
+        .subject-tin-hoc { background: #0984e3; color: white; }
+        .subject-cong-nghe { background: #e84393; color: white; }
+        .subject-hdtn { background: #6c5ce7; color: white; }
+        .subject-stem { background: #00b894; color: white; }
+        .subject-gd-dia-phuong { background: #fab1a0; color: #2d3436; }
+        .subject-shl { background: #ffeaa7; color: #2d3436; font-style: italic; }
+        .subject-empty { background: #f8f9fa; color: #b2bec3; }
+
+        .current-day {
+            border: 3px solid #e74c3c !important;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(231, 76, 60, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(231, 76, 60, 0.8); }
+        }
+
+        .current-day th {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+        }
+
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px dashed #dfe6e9;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2d3436;
+            font-size: 1.2em;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .header {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .datetime-box, .class-section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .datetime-value {
+                font-size: 1.3em;
+            }
+            table {
+                font-size: 0.75em;
+            }
+            th, td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> THỜI KHÓA BIỂU </h1>
+            <div class="header-subtitle">NĂM HỌC 2026 - 2027</div>
+        </div>
+
+        <div class="datetime-week">
+            <div class="datetime-box">
+                <div class="datetime-label">📅 Ngày hiện tại</div>
+                <div class="datetime-value" id="current-date">--</div>
+            </div>
+            <div class="datetime-box">
+                <div class="datetime-label">⏰ Giờ hiện tại</div>
+                <div class="datetime-value" id="current-time">--</div>
+            </div>
+            <div class="datetime-box week-box">
+                <div class="datetime-label">📆 Tuần học</div>
+                <div class="datetime-value week-number" id="week-number">--</div>
+            </div>
+        </div>
+
+        <!-- Lớp 7A6 -->
+        <div class="class-section class-7a6">
+            <h2 class="class-title">LỚP 7A6</h2>
+            <table id="table-7a6">
+                <thead>
+                    <tr>
+                        <th>BUỔI</th>
+                        <th>TIẾT</th>
+                        <th>THỜI GIAN</th>
+                        <th>THỨ 2</th>
+                        <th>THỨ 3</th>
+                        <th>THỨ 4</th>
+                        <th>THỨ 5</th>
+                        <th>THỨ 6</th>
+                        <th>THỨ 7</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="section-row">
+                        <td rowspan="5">SÁNG</td>
+                        <td>1</td>
+                        <td>6h45-7h45</td>
+                        <td class="subject-tin-hoc">TIN HỌC</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-sinh">SINH</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-am-nhac">ÂM NHẠC</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>7h50-8h35</td>
+                        <td class="subject-the-duc">THỂ DỤC</td>
+                        <td class="subject-su">SỬ</td>
+                        <td class="subject-su">SỬ</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-sinh">SINH</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>8h50-9h35</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                        <td class="subject-gd-dia-phuong">GD ĐỊA PHƯƠNG</td>
+                        <td class="subject-ly">VẬT LÝ</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                        <td class="subject-cong-nghe">CÔNG NGHỆ</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>9h40-10h25</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                        <td class="subject-hoa">HÓA</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-my-thuat">MỸ THUẬT</td>
+                        <td class="subject-the-duc">THỂ DỤC</td>
+                        <td class="subject-toan">TOÁN</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>10h30-11h15</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                        <td class="subject-gdcd">GDCD</td>
+                        <td class="subject-dia">ĐỊA</td>
+                        <td class="subject-shl">SHL</td>
+                    </tr>
+                    <tr class="section-row">
+                        <td rowspan="5">CHIỀU</td>
+                        <td>1</td>
+                        <td>12h45-13h45</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-hoa">HÓA</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>13h50-14h35</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-the-duc">THỂ DỤC</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>14h40-15h25</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-van">VĂN</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>15h40-16h25</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-su">SỬ</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>16h30-17h15</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-cong-nghe">CÔNG NGHỆ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Lớp 9A9 -->
+        <div class="class-section class-9a9">
+            <h2 class="class-title">LỚP 9A9</h2>
+            <table id="table-9a9">
+                <thead>
+                    <tr>
+                        <th>BUỔI</th>
+                        <th>TIẾT</th>
+                        <th>THỜI GIAN</th>
+                        <th>THỨ 2</th>
+                        <th>THỨ 3</th>
+                        <th>THỨ 4</th>
+                        <th>THỨ 5</th>
+                        <th>THỨ 6</th>
+                        <th>THỨ 7</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="section-row">
+                        <td rowspan="5">SÁNG</td>
+                        <td>1</td>
+                        <td>6h45-7h45</td>
+                        <td class="subject-sinh">SINH</td>
+                        <td class="subject-su">SỬ</td>
+                        <td class="subject-my-thuat">MỸ THUẬT</td>
+                        <td class="subject-su">SỬ</td>
+                        <td class="subject-the-duc">THỂ DỤC</td>
+                        <td class="subject-van">VĂN</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>7h50-8h35</td>
+                        <td class="subject-am-nhac">ÂM NHẠC</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                        <td class="subject-ly">VẬT LÝ</td>
+                        <td class="subject-ly">VẬT LÝ</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>8h50-9h35</td>
+                        <td class="subject-anh">NGOẠI NGỮ</td>
+                        <td class="subject-gd-dia-phuong">GD ĐỊA PHƯƠNG</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-the-duc">THỂ DỤC</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>9h40-10h25</td>
+                        <td class="subject-tin-hoc">TIN HỌC</td>
+                        <td class="subject-gdcd">GDCD</td>
+                        <td class="subject-cong-nghe">CÔNG NGHỆ</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>10h30-11h15</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-hdtn">HĐTN</td>
+                        <td class="subject-toan">TOÁN</td>
+                        <td class="subject-van">VĂN</td>
+                        <td class="subject-shl">SHL</td>
+                    </tr>
+                    <tr class="section-row">
+                        <td rowspan="5">CHIỀU</td>
+                        <td>1</td>
+                        <td>12h45-13h45</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>13h50-14h35</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-dia">ĐỊA</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>14h40-15h25</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-hoa">HÓA</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>15h40-16h25</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>16h30-17h15</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                        <td class="subject-empty">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">📌 Chú thích màu các môn học:</div>
+            <div class="legend-items">
+                <span class="legend-item subject-van">Văn</span>
+                <span class="legend-item subject-toan">Toán</span>
+                <span class="legend-item subject-anh">Anh</span>
+                <span class="legend-item subject-ly">Lý</span>
+                <span class="legend-item subject-hoa">Hóa</span>
+                <span class="legend-item subject-sinh">Sinh</span>
+                <span class="legend-item subject-su">Sử</span>
+                <span class="legend-item subject-dia">Địa</span>
+                <span class="legend-item subject-gdcd">GDCD</span>
+                <span class="legend-item subject-the-duc">Thể dục</span>
+                <span class="legend-item subject-am-nhac">Âm nhạc</span>
+                <span class="legend-item subject-my-thuat">Mỹ thuật</span>
+                <span class="legend-item subject-tin-hoc">Tin học</span>
+                <span class="legend-item subject-cong-nghe">Công nghệ</span>
+                <span class="legend-item subject-hdtn">HĐTN</span>
+                <span class="legend-item subject-stem">STEM</span>
+                <span class="legend-item subject-gd-dia-phuong">GDĐP</span>
+                <span class="legend-item subject-shl">SHL</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p> Chúc các em học tập tốt! </p>
+            <p>Năm học 2026-2027 | Tuần bắt đầu từ ngày 07/09/2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Format date
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('vi-VN', options);
+            
+            // Format time
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Calculate school week
+            calculateSchoolWeek(now);
+            
+            // Highlight current day
+            highlightCurrentDay(now.getDay());
+        }
+
+        function calculateSchoolWeek(currentDate) {
+            // Week 1 starts from September 7, 2026
+            const semesterStartDate = new Date(2026, 8, 7); // Month is 0-indexed (8 = September)
+            
+            // Find the Monday of the current week
+            const currentDay = new Date(currentDate);
+            const dayOfWeek = currentDay.getDay();
+            const diff = currentDay.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust when day is Sunday
+            const currentMonday = new Date(currentDay.setDate(diff));
+            
+            // Calculate difference in weeks
+            const diffTime = currentMonday - semesterStartDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const weekNumber = Math.floor(diffDays / 7) + 1;
+            
+            if (weekNumber > 0) {
+                document.getElementById('week-number').textContent = `TUẦN ${weekNumber}`;
+            } else {
+                document.getElementById('week-number').textContent = 'CHƯA BẮT ĐẦU';
+            }
+        }
+
+        function highlightCurrentDay(dayOfWeek) {
+            // dayOfWeek: 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+            // In Vietnamese calendar, we consider Monday as 1, Saturday as 6
+            
+            const tables = document.querySelectorAll('table');
+            
+            tables.forEach(table => {
+                // Remove previous highlights
+                const allHeaders = table.querySelectorAll('th');
+                allHeaders.forEach(th => th.classList.remove('current-day'));
+                
+                const allCells = table.querySelectorAll('td');
+                allCells.forEach(td => td.classList.remove('current-day'));
+                
+                // Highlight current day column (Monday = 1, ..., Saturday = 6)
+                // In the table, columns are: 0=BUỔI, 1=TIẾT, 2=THỜI GIAN, 3=THỨ 2, 4=THỨ 3, ..., 8=THỨ 7
+                if (dayOfWeek >= 1 && dayOfWeek <= 6) {
+                    const columnIndex = dayOfWeek + 2; // +2 because of first 3 columns
+                    
+                    // Highlight header
+                    const headers = table.querySelectorAll('th');
+                    if (headers[columnIndex]) {
+                        headers[columnIndex].classList.add('current-day');
+                    }
+                    
+                    // Highlight cells in this column
+                    const rows = table.querySelectorAll('tbody tr');
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        if (cells[columnIndex]) {
+                            cells[columnIndex].classList.add('current-day');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Initial call
+        updateDateTime();
+        
+        // Update every second
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
